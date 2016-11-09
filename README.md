@@ -8,7 +8,7 @@ generates an "installer" from modules.
 
 Add this line to your module's Gemfile:
 
-    gem 'kafo_module_lint', '~> 0.0'
+    gem 'kafo_module_lint', '~> 1.0'
 
 It's highly recommended to also include the [puppet-lint-param-docs](https://github.com/domcleal/puppet-lint-param-docs)
 lint plugin to ensure _all_ parameters are documented:
