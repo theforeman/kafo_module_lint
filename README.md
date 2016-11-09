@@ -29,6 +29,9 @@ to run the puppet-lint-param-docs plugin.
 
 With both enabled, running `rake lint` will check the module for correctness.
 
+Alternatively, run `kafo-module-lint` to check all manifests or pass individual
+paths to check one or more files.
+
 ### Rake task config options
 
 Customise the rake task with a configuration block:

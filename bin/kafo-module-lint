@@ -1,0 +1,23 @@
+#!/usr/bin/env ruby
+require 'kafo_module_lint'
+require 'optparse'
+
+options = {}
+OptionParser.new do |opts|
+  opts.banner = "Usage: kafo-module-lint [options] [files..]"
+
+  opts.on("-v", "--[no-]verbose", "Run verbosely") do |v|
+    options[:verbose] = v
+  end
+end.parse!
+
+files = ARGV.empty? ? Dir['manifests/**/*.pp'] : ARGV
+result = true
+files.map { |f| File.expand_path(f) }.each do |manifest|
+  puts "Checking #{manifest}" if options[:verbose]
+  linter = KafoModuleLint::Linter.new(manifest)
+  result = false unless linter.pass?
+  linter.puts_errors
+end
+
+exit(result ? 0 : 1)
