@@ -42,6 +42,8 @@ Customise the rake task with a configuration block:
 
 It supports:
 
+* `lint.modulepath` - module path to load custom types from, defaults to
+  `spec/fixtures/modules`
 * `lint.pattern` - files to lint check, defaults to `manifests/**/*.pp`
 
 # License

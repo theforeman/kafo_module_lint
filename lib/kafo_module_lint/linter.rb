@@ -1,5 +1,6 @@
 require 'kafo_parsers/parsers'
-require 'kafo/kafo_configure'
+require 'kafo/data_type'
+require 'kafo/exceptions'
 
 module KafoModuleLint
   class Linter

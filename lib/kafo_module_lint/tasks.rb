@@ -8,10 +8,12 @@ module KafoModuleLint
 
     attr_accessor :name
     attr_accessor :pattern
+    attr_accessor :modulepath
 
     def initialize(*args, &task_block)
       @name = args.shift || :'lint:kafo_module'
       @pattern = DEFAULT_PATTERN
+      @modulepath = File.join('spec', 'fixtures', 'modules')
       define(args, &task_block)
     end
 
@@ -24,10 +26,12 @@ module KafoModuleLint
       task name do
         RakeFileUtils.send(:verbose, true) do
           result = true
-          FileList[pattern].each do |manifest|
-            linter = Linter.new(manifest)
-            result = false unless linter.pass?
-            linter.puts_errors
+          TypeLoader.new(modulepath).with_types do
+            FileList[pattern].each do |manifest|
+              linter = Linter.new(manifest)
+              result = false unless linter.pass?
+              linter.puts_errors
+            end
           end
 
           abort unless result

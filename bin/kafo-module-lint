@@ -2,9 +2,13 @@
 require 'kafo_module_lint'
 require 'optparse'
 
-options = {}
+options = {modulepath: 'spec/fixtures/modules'}
 OptionParser.new do |opts|
   opts.banner = "Usage: kafo-module-lint [options] [files..]"
+
+  opts.on("-m", "--modulepath [MODULEPATH]", "Modulepath to load types from") do |mp|
+    options[:modulepath] = mp
+  end
 
   opts.on("-v", "--[no-]verbose", "Run verbosely") do |v|
     options[:verbose] = v
@@ -12,12 +16,15 @@ OptionParser.new do |opts|
 end.parse!
 
 files = ARGV.empty? ? Dir['manifests/**/*.pp'] : ARGV
+
 result = true
-files.map { |f| File.expand_path(f) }.each do |manifest|
-  puts "Checking #{manifest}" if options[:verbose]
-  linter = KafoModuleLint::Linter.new(manifest)
-  result = false unless linter.pass?
-  linter.puts_errors
+KafoModuleLint::TypeLoader.new(options[:modulepath]).with_types do
+  files.map { |f| File.expand_path(f) }.each do |manifest|
+    puts "Checking #{manifest}" if options[:verbose]
+    linter = KafoModuleLint::Linter.new(manifest)
+    result = false unless linter.pass?
+    linter.puts_errors
+  end
 end
 
 exit(result ? 0 : 1)
