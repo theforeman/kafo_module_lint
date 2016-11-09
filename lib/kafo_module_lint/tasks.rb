@@ -23,7 +23,9 @@ module KafoModuleLint
       task_block.call(*[self, args].slice(0, task_block.arity)) if task_block
 
       Rake::Task[name].clear if Rake::Task.task_defined?(name)
-      task name do
+
+      definition = Rake::Task.task_defined?('spec_prep') ? {name => [:'spec_prep']} : name
+      task definition do
         RakeFileUtils.send(:verbose, true) do
           result = true
           TypeLoader.new(modulepath).with_types do
