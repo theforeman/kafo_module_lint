@@ -22,7 +22,7 @@ module KafoModuleLint
 
     describe "with unknown param" do
       let(:manifest) { ManifestFactory.build({'a' => 'String', 'b' => 'Unknown[String]'}) }
-      let(:error) { "#{manifest_file}: parameter b has an invalid type Unknown[String]: unknown data type Unknown" }
+      let(:error) { "#{manifest_file} parameter b: unknown data type Unknown" }
       specify { linter.pass?.must_equal false }
       specify { linter.errors.must_equal [error] }
       specify { proc { linter.puts_errors }.must_output (error + $/) }
