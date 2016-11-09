@@ -19,7 +19,7 @@ lint plugin to ensure _all_ parameters are documented:
 
 Add this line to your module's Rakefile:
 
-		require 'kafo_module_lint/tasks'
+    require 'kafo_module_lint/tasks'
 
 This will automatically register a new `lint:kafo_module` task and enhance the
 `lint` task if it exists (i.e. from puppet-lint).
