@@ -19,7 +19,7 @@ files = ARGV.empty? ? Dir['manifests/**/*.pp'] : ARGV
 
 result = true
 KafoModuleLint::TypeLoader.new(options[:modulepath]).with_types do
-  files.map { |f| File.expand_path(f) }.each do |manifest|
+  files.each do |manifest|
     puts "Checking #{manifest}" if options[:verbose]
     linter = KafoModuleLint::Linter.new(manifest)
     result = false unless linter.pass?

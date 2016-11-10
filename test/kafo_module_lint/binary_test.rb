@@ -1,4 +1,5 @@
 require 'test_helper'
+require 'pathname'
 
 module KafoModuleLint
   describe 'kafo-module-lint' do
@@ -32,6 +33,14 @@ module KafoModuleLint
       specify { exit_code.success?.must_equal false }
       specify { stdout.must_equal (error + $/) }
       specify { stderr.must_equal '' }
+    end
+
+    describe "with relative path" do
+      let(:manifest) { ManifestFactory.build({}) }
+      let(:manifest_file) do
+        Pathname.new(ManifestFileFactory.build(manifest).path).relative_path_from(Pathname.new(Dir.pwd)).to_s
+      end
+      specify { exit_code.success?.must_equal true }
     end
   end
 end

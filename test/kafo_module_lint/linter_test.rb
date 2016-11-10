@@ -1,5 +1,6 @@
 require 'test_helper'
 require 'kafo_module_lint/linter'
+require 'pathname'
 
 module KafoModuleLint
   describe Linter do
@@ -26,6 +27,14 @@ module KafoModuleLint
       specify { linter.pass?.must_equal false }
       specify { linter.errors.must_equal [error] }
       specify { proc { linter.puts_errors }.must_output (error + $/) }
+    end
+
+    describe "with relative path" do
+      let(:manifest) { ManifestFactory.build({}) }
+      let(:manifest_file) do
+        Pathname.new(ManifestFileFactory.build(manifest).path).relative_path_from(Pathname.new(Dir.pwd)).to_s
+      end
+      specify { linter.pass?.must_equal true }
     end
   end
 end
