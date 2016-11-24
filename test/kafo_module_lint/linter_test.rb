@@ -49,10 +49,9 @@ module KafoModuleLint
 
     describe "with wrong argument count" do
       let(:manifest) { ManifestFactory.build({'a' => 'String', 'b' => 'Undef["foo"]'}) }
-      let(:error) { "#{manifest_file} parameter b: wrong number of arguments (given 1, expected 0)" }
+      let(:error) { /#{Regexp.escape(manifest_file)} parameter b: wrong number of arguments \(.*1.*0.*\)/ }
       specify { linter.pass?.must_equal false }
-      specify { linter.errors.must_equal [error] }
-      specify { proc { linter.puts_errors }.must_output (error + $/) }
+      specify { linter.errors.first.must_match error }
     end
   end
 end
