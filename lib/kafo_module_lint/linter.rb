@@ -11,7 +11,7 @@ module KafoModuleLint
     end
 
     def pass?
-      errors.empty?
+      skip? || errors.empty?
     end
 
     def errors
@@ -19,7 +19,7 @@ module KafoModuleLint
         errors = []
         parsed[:types].each do |param,type|
           check_param(param, type, errors)
-        end
+        end unless skip?
         errors
       end
     end
@@ -47,6 +47,11 @@ module KafoModuleLint
         errors << "#{path} parameter #{param}: #{e.message}"
         false
       end
+    end
+
+    def skip?
+      # kafo_parsers doesn't support 3.x future parser
+      ENV['FUTURE_PARSER'] == 'yes'
     end
   end
 end

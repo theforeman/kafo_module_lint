@@ -36,5 +36,15 @@ module KafoModuleLint
       end
       specify { linter.pass?.must_equal true }
     end
+
+    describe "with future parser" do
+      let(:manifest) { ManifestFactory.build({'a' => 'String', 'b' => 'Unknown[String]'}) }
+      before { ENV['FUTURE_PARSER'] = 'yes' }
+      after { ENV.delete('FUTURE_PARSER') }
+
+      specify { linter.pass?.must_equal true }
+      specify { linter.errors.must_equal [] }
+      specify { proc { linter.puts_errors }.must_output nil }
+    end
   end
 end
