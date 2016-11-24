@@ -43,7 +43,7 @@ module KafoModuleLint
       begin
         Kafo::DataType.new_from_string(type)
         true
-      rescue Kafo::ConfigurationException => e
+      rescue Kafo::ConfigurationException, ArgumentError => e
         errors << "#{path} parameter #{param}: #{e.message}"
         false
       end
