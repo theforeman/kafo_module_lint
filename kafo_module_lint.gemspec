@@ -4,11 +4,11 @@ require File.join(File.expand_path(File.dirname(__FILE__)), 'lib', 'kafo_module_
 Gem::Specification.new do |spec|
   spec.name          = "kafo_module_lint"
   spec.version       = KafoModuleLint::VERSION
-  spec.authors       = ["Dominic Cleal"]
-  spec.email         = ["dominic@cleal.org"]
+  spec.authors       = ["Dominic Cleal", "Ewoud Kohl van Wijngaarden"]
+  spec.email         = ["dominic@cleal.org", "ewoud+rubygems@kohlvanwijngaarden.nl"]
   spec.summary       = %q{Validate Puppet modules are correctly documented for Kafo}
   spec.description   = %q{Validates Puppet modules and manifests to ensure parameters are all correctly documented for use with the Kafo gem}
-  spec.homepage      = "https://github.com/domcleal/kafo_module_lint"
+  spec.homepage      = "https://github.com/ekohl/kafo_module_lint"
   spec.license       = "GPLv3+"
 
   spec.files         = `git ls-files`.split($/)
