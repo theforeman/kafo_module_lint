@@ -8,7 +8,7 @@ Gem::Specification.new do |spec|
   spec.email         = ["dominic@cleal.org", "ewoud+rubygems@kohlvanwijngaarden.nl"]
   spec.summary       = %q{Validate Puppet modules are correctly documented for Kafo}
   spec.description   = %q{Validates Puppet modules and manifests to ensure parameters are all correctly documented for use with the Kafo gem}
-  spec.homepage      = "https://github.com/ekohl/kafo_module_lint"
+  spec.homepage      = "https://github.com/theforeman/kafo_module_lint"
   spec.license       = "GPLv3+"
 
   spec.files         = `git ls-files`.split($/)
