@@ -20,7 +20,7 @@ Gem::Specification.new do |spec|
   spec.add_development_dependency "rake"
   spec.add_development_dependency "minitest", "~> 5.0"
 
-  spec.add_dependency 'kafo', '>= 1.0.4', '< 5'
+  spec.add_dependency 'kafo', '>= 1.0.4', '< 7'
   spec.add_dependency 'kafo_parsers'
-  spec.add_dependency 'puppet-strings', '>= 0.99', '< 3'
+  spec.add_dependency 'puppet-strings', '>= 0.99', '< 5'
 end
