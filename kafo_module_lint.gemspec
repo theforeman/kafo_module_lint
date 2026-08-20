@@ -22,5 +22,5 @@ Gem::Specification.new do |spec|
 
   spec.add_dependency 'kafo', '>= 1.0.4', '< 7'
   spec.add_dependency 'kafo_parsers'
-  spec.add_dependency 'puppet-strings', '>= 0.99', '< 5'
+  spec.add_dependency 'openvox-strings', '~> 7.1'
 end
